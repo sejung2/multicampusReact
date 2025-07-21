@@ -81,18 +81,39 @@ function App() {
       }
     }
     content = <Article title={title} body={body}></Article>;
+    // contextControl 객체 변수에 두 개의 태그를 담아서 표현
+    // jsx 최상위 태그가 반드시 있어야 함
+    // 의미없는 태그를 활용해서 최상위 태그 구성 가능
     contextControl = (
-      <li>
-        <a
-          href={'/update/' + id}
-          onClick={(event) => {
-            event.preventDefault();
-            setMode('UPDATE');
-          }}
-        >
-          Update
-        </a>
-      </li>
+      <>
+        <li>
+          <a
+            href={'/update/' + id}
+            onClick={(event) => {
+              event.preventDefault();
+              setMode('UPDATE');
+            }}
+          >
+            Update
+          </a>
+        </li>
+        <li>
+          <input
+            type='button'
+            value='Delete'
+            onClick={() => {
+              //delete는 화면 변화가 필요없으므로 버튼 클릭 이벤트에서 코드 진행
+              // 새로운 배열 객체를 생성하고, 생성된 객체에 delete에 해당하는 id data 를 제외한 나머지 data만 추가함
+              const newTopic = [];
+              for (let i = 0; i < topics.length; i++) {
+                newTopic.push(topics[i]); // 삭제 대상이
+              }
+              setTopics(newTopic); // 새로운 배열 객체를 setTopics로 전달
+              setMode('WELCOME'); // 삭제 후에 Welcome 모드로 변경
+            }}
+          />
+        </li>
+      </>
     );
   } else if (mode === 'CREATE') {
     // create 메뉴 클릭하면 입력창을 표현(component 이용)
