@@ -1,4 +1,4 @@
-import Right3 from './RIght3';
+import Right3 from './Right3';
 
 const Right2 = () => {
   return (
